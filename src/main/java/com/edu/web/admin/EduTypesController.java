@@ -64,6 +64,7 @@ public class EduTypesController {
      * @Author: Mr.Jia
      * @Date:   2020-03-27 21:29:11
      */
+    // aa
     @PostMapping("/edutypes")
     public String postTypes(@Valid EduTypes eduTypes,
                             BindingResult result,
