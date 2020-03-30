@@ -1,0 +1,19 @@
+spring:
+  resources:
+    static-locations: classpath:/static/
+  mvc:
+    static-path-pattern: /**
+
+  thymeleaf:
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+    # 禁用缓存
+    cache: false
+    # thymeleaf非标准html
+    servlet:
+      content-type: text/html
+
+  profiles:
+    active: dev
+

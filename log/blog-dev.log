@@ -1,0 +1,6 @@
+2020-03-30 00:18:53.836  WARN 68168 --- [HikariPool-43 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-43 - Thread starvation or clock leap detected (housekeeper delta=1h33m57s138ms).
+2020-03-30 09:00:13.473  WARN 68168 --- [HikariPool-43 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-43 - Thread starvation or clock leap detected (housekeeper delta=8h32m49s418ms).
+2020-03-30 09:06:51.116  INFO 68168 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-03-30 09:06:51.120  INFO 68168 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-03-30 09:06:51.127  INFO 68168 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-43 - Shutdown initiated...
+2020-03-30 09:06:51.136  INFO 68168 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-43 - Shutdown completed.
