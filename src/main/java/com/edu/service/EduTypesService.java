@@ -4,6 +4,8 @@ import com.edu.pojo.EduTypes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @program: spring-boot-eplatform-01
  * @description:
@@ -19,6 +21,8 @@ public interface EduTypesService {
     EduTypes getEduTypeByName(String name);
 
     Page<EduTypes> listEduType(Pageable pageable);
+
+    List<EduTypes> listEduType();
 
     EduTypes updateEduType(Long id, EduTypes type);
 

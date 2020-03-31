@@ -10,9 +10,8 @@ import java.util.Date;
  * @date: 2020-03-26 14:37
  **/
 @Entity
-@Table(name = "tbl_platefrom")
+@Table(name = "tbl_eplatefrom")
 public class EnglishPlatform {
-
 
     @Id
     @GeneratedValue

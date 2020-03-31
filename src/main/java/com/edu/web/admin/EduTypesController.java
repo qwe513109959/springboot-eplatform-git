@@ -55,7 +55,7 @@ public class EduTypesController {
         // 和th:object="${edutypes}"搭配使用
         // th:if="${#fields.hasErrors('name')}" 没啥用啊
         model.addAttribute("type", new EduTypes());
-        return "admin/AAedutypes-input";
+        return "admin/edutypes-input";
     }
 
     /**
@@ -74,10 +74,10 @@ public class EduTypesController {
         EduTypes eduTypes1 = eduTypeService.getEduTypeByName(eduTypes.getName());
         if (eduTypes1 != null) {
             result.rejectValue("name","nameError","不能添加重复的分类");
-            return "admin/AAedutypes-input";
+            return "admin/edutypes-input";
         }
         if (result.hasErrors()) {
-            return "admin/AAedutypes-input";
+            return "admin/edutypes-input";
         }
         EduTypes eduTypes2 = eduTypeService.saveEduType(eduTypes);
         if (eduTypes2 == null ) {
@@ -86,7 +86,7 @@ public class EduTypesController {
         } else {
             attributes.addFlashAttribute("message", "新增成功");
         }
-        return "redirect:/admin/AAedutypes";
+        return "redirect:/admin/edutypes";
     }
 
 

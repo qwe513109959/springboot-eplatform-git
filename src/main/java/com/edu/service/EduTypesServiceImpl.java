@@ -10,7 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
+
 
 /**
  * @program: spring-boot-eplatform-01
@@ -45,6 +46,11 @@ public class EduTypesServiceImpl implements EduTypesService {
     @Override
     public Page<EduTypes> listEduType(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    @Override
+    public List<EduTypes> listEduType() {
+        return repository.findAll();
     }
 
     @Transactional
