@@ -40,7 +40,7 @@ public class EplatformController {
         return "admin/eplatform";
     }
 
-    @RequestMapping(value = "/eplatform/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/eplatform/search", method = RequestMethod.POST)
     public String search(@PageableDefault(size = 2, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          Model model,
                          EplatformQuery query){

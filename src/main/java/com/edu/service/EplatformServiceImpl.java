@@ -62,11 +62,12 @@ public class EplatformServiceImpl implements EplatformService {
                 if (!"".equals(query.getTitle()) && query.getTitle() != null) {
                     predicates.add(cb.like(root.<String>get("title"), "%" + query.getTitle() + "%"));
                 }
+                // if (query.getType().getId() != null) {   Eplatform >> EplatformQuery
                 if (query.getTypeId() != null) {
                     predicates.add(cb.equal(root.<EduTypes>get("id"), query.getTypeId()));
                 }
                 if (query.isRecommend()) {
-                    predicates.add(cb.equal(root.<BooleanAssertionPredicate>get("reconmmend"), query.isRecommend()));
+                    predicates.add(cb.equal(root.<BooleanAssertionPredicate>get("recommend"), query.isRecommend()));
                 }
                 // cq进行查询
                 cq.where(predicates.toArray(new Predicate[predicates.size()]));
