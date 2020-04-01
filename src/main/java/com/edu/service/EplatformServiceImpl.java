@@ -64,6 +64,7 @@ public class EplatformServiceImpl implements EplatformService {
                 if (!"".equals(query.getTitle()) && query.getTitle() != null) {
                     predicates.add(cb.like(root.<String>get("title"), "%" + query.getTitle() + "%"));
                 }
+                // getType() 报空指针异常
                 // if (query.getType().getId() != null) {   Eplatform >> EplatformQuery
                 if (query.getTypeId() != null) {
                     predicates.add(cb.equal(root.<EduTypes>get("id"), query.getTypeId()));

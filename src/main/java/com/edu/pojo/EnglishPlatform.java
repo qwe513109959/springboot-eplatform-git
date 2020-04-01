@@ -1,7 +1,10 @@
 package com.edu.pojo;
 
 import javax.persistence.*;
+import javax.xml.stream.events.Comment;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: spring-boot-englishplatform-01
@@ -36,12 +39,17 @@ public class EnglishPlatform {
     private EduTypes edu_type;
 
     @ManyToOne
+    private Grade grade;
+
+    @ManyToOne
     private User user;
+
+//    @OneToMany(mappedBy = "eplatform")
+//    private List<Comment> comment = new ArrayList<>();
+
 
     //   List comments
 //   List tags
-    @ManyToOne
-    private Grade grade;
 
 
     public EnglishPlatform() {
@@ -186,5 +194,13 @@ public class EnglishPlatform {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
     }
 }

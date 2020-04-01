@@ -1,11 +1,11 @@
 package com.edu.service;
 
-import com.edu.pojo.EduTypes;
-import com.edu.pojo.EnglishPlatform;
 import com.edu.pojo.Grade;
-import com.edu.vo.EplatformQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+
 
 /**
  * @program: spring-boot-eplatform-01
@@ -20,6 +20,8 @@ public interface GradeService {
     Grade getGradeByName(String name);
 
     Page<Grade> listGrade(Pageable pageable);
+
+    List<Grade> listGrade();
 
     Grade saveGrade(Grade grade);
 

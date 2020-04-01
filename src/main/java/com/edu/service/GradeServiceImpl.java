@@ -10,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.*;
+import java.util.List;
+
 /**
  * @program: spring-boot-eplatform-01
  * @description:
@@ -37,6 +40,12 @@ public class GradeServiceImpl implements GradeService{
     public Page<Grade> listGrade(Pageable pageable) {
         return repository.findAll(pageable);
     }
+
+    @Override
+    public List<Grade> listGrade() {
+        return repository.findAll();
+    }
+
 
     @Transactional
     @Override

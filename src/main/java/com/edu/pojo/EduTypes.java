@@ -21,7 +21,7 @@ public class EduTypes {
     @GeneratedValue
     private Long id;
 
-    @NotEmpty(message="密码不能为空")
+    @NotEmpty(message="name不能为空")
     private String name;
 
     @OneToMany(mappedBy = "edu_type")

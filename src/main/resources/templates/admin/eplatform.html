@@ -95,11 +95,20 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="eplatform,iterStat : ${page.content}" >
+          <!--
+            eplatform : ${page.content}是获取页面列表的内容，page是个json格式的
+            ${eplatform.name}获取分类的名字
+            iterStat类似于序号，${iterStat.count}迭代的总数，第一次总数就是1
+          -->
+          <tr th:each="eplatform, iterStat : ${page.content}" >
             <td th:text="${iterStat.count}">1</td>
             <td th:text="${eplatform.title}">刻意练习清单</td>
-            <td>认知升级</td>
-<!--            <td th:text="${eplatform.types.name}">认知升级</td>-->
+            <!--
+            获取外键的值
+              mappedBy = "edu_type"
+              类名.mappedBy.属性
+            -->
+            <td th:text="${eplatform.edu_type.name}">认知升级</td>
             <td th:text="${eplatform.recommend} ? '是':'否'">是</td>
             <td th:text="${eplatform.published} ? '发布':'草稿'">草稿</td>
             <td th:text="${eplatform.updateTime}">2017-10-02 09:45</td>

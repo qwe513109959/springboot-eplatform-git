@@ -2,7 +2,7 @@ package com.edu.vo;
 
 /**
  * @program: spring-boot-eplatform-01
- * @description: 封装对象，查询的对象
+ * @description: 封装查询对象(title,typeId,recommend)，查询的对象
  * @author: Mr.jia
  * @date: 2020-03-30 16:45
  **/
