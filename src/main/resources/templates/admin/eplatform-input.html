@@ -89,11 +89,11 @@
           </div>
           <div class=" field">
             <div class="ui left labeled action input">
-              <label class="ui compact teal basic label">标签</label>
+              <label class="ui compact teal basic label">级别</label>
               <div class="ui fluid selection multiple search  dropdown">
                 <input type="hidden" name="tagIds" th:value="*{tagIds}" >
                 <i class="dropdown icon"></i>
-                <div class="default text">标签</div>
+                <div class="default text">级别</div>
                 <div class="menu">
                   <div th:each="tag : ${tags}" class="item" data-value="1" th:data-value="${tag.id}" th:text="${tag.name}">java</div>
                 </div>
@@ -238,6 +238,13 @@
           rules: [{
             type : 'empty',
             prompt: '标题：请输入博客标题'
+          }]
+        },
+        content : {
+          identifier: 'content',
+          rules: [{
+            type : 'empty',
+            prompt: '标题：请输入博客内容'
           }]
         },
         content : {

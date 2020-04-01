@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin")
 public class EplatformController {
 
+    private static final String LIST= "admin/eplatform";
+
     @Autowired
     EplatformService eplatformService;
 
@@ -37,7 +39,7 @@ public class EplatformController {
                               Model model) {
         model.addAttribute("types", eduTypesService.listEduType());
         model.addAttribute("page", eplatformService.listEplatform(pageable, eplatform));
-        return "admin/eplatform";
+        return LIST;
     }
 
     @RequestMapping(value = "/eplatform/search", method = RequestMethod.POST)
@@ -46,6 +48,13 @@ public class EplatformController {
                          EplatformQuery query){
         model.addAttribute("page", eplatformService.listEplatform(pageable, query));
         return "admin/eplatform :: eplatformList";
+    }
+
+    @GetMapping("/eplatform-input")
+    public String input() {
+        // 初始化分类
+        // model.addAttribute 往前台传数据，可以传对象，可以传List，通过el表达式 ${}可以获取到
+        return "admin/eplatform";
     }
 
 }

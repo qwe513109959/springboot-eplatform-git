@@ -54,6 +54,7 @@ public class EduTypesController {
     public String toinput(Model model) {
         // 和th:object="${edutypes}"搭配使用
         // th:if="${#fields.hasErrors('name')}" 没啥用啊
+        // model.addAttribute 往前台传数据，可以传对象，可以传List，通过el表达式 ${}可以获取到
         model.addAttribute("type", new EduTypes());
         return "admin/edutypes-input";
     }
@@ -64,7 +65,6 @@ public class EduTypesController {
      * @Author: Mr.Jia
      * @Date:   2020-03-27 21:29:11
      */
-    // aa
     @PostMapping("/edutypes")
     public String postTypes(@Valid EduTypes eduTypes,
                             BindingResult result,
@@ -112,7 +112,9 @@ public class EduTypesController {
     public String editPost(@Valid EduTypes eduTypes,
                            BindingResult result,
                            @PathVariable Long id,
-                           RedirectAttributes attributes) {
+                           RedirectAttributes attributes,
+                           Model model) {
+        model.addAttribute("type",eduTypes);
         EduTypes eduTypes1 = eduTypeService.getEduTypeByName(eduTypes.getName());
         if (eduTypes1 != null) {
             result.rejectValue("name","nameError","不能添加重复的分类");

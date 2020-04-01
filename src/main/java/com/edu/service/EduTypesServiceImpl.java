@@ -31,7 +31,6 @@ public class EduTypesServiceImpl implements EduTypesService {
         return repository.save(type);
     }
 
-    @Transactional
     @Override
     public EduTypes getEduType(Long id) {
         return repository.getOne(id);

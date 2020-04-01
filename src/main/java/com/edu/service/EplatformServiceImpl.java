@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -39,10 +40,11 @@ public class EplatformServiceImpl implements EplatformService {
 
     /**
      * @Description: 高级查询，组合查询
-     * @Param:
+     * @Param:  list
      * @Author: Mr.Jia
      * @Date: 2020/3/30 5:01 下午
      */
+    @Transactional
     @Override
     public Page<EnglishPlatform> listEplatform(Pageable pageable, EplatformQuery query) {
         //规格定义
@@ -76,11 +78,13 @@ public class EplatformServiceImpl implements EplatformService {
         }, pageable);
     }
 
+    @Transactional
     @Override
     public EnglishPlatform saveEplatform(EnglishPlatform englishPlatform) {
         return repository.save(englishPlatform);
     }
 
+    @Transactional
     @Override
     public EnglishPlatform updateEplatform(Long id, EnglishPlatform englishPlatform) {
         EnglishPlatform one = repository.findById(id).get();
@@ -91,6 +95,7 @@ public class EplatformServiceImpl implements EplatformService {
         return repository.save(one);
     }
 
+    @Transactional
     @Override
     public void deleteEplatform(Long id) {
         repository.deleteById(id);

@@ -38,8 +38,10 @@ public class EnglishPlatform {
     @ManyToOne
     private User user;
 
-//   List comments
+    //   List comments
 //   List tags
+    @ManyToOne
+    private Grade grade;
 
 
     public EnglishPlatform() {
