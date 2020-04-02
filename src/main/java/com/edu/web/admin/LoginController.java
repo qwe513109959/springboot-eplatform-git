@@ -51,7 +51,7 @@ public class LoginController {
         User user = userService.checkUser(username, password);
         if (user != null) {
             user.setPassword(null);
-            session.setAttribute("loginUser", user);
+            session.setAttribute("user", user);
             return "admin/index";
         } else {
             attributes.addFlashAttribute("msg", "用户名和密码不正确AAAAAA");

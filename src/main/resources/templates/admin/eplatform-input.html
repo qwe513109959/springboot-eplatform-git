@@ -96,7 +96,10 @@
                   且需要使用以下格式
                   th:value="*{edu_type}!=null ? *{edu_type.id}"
                 -->
-                <input type="hidden" name="type.id" th:value="*{edu_type}!=null ? *{edu_type.id}">
+<!-- 为 eplatform.setEdu_type(eduTypesService.getEduType(eplatform.getEdu_type().getId()));
+    为~赋值，否则空指针异常
+-->
+                <input type="hidden" name="edu_type.id" th:value="*{edu_type}!=null ? *{edu_type.id}">
                 <i class="dropdown icon"></i>
                 <div class="default text">分类</div>
                 <div class="menu">
@@ -108,9 +111,9 @@
           <div class="required field">
             <div class="ui left labeled action input">
               <label class="ui compact teal basic label">等级</label>
-<!--              <div class="ui fluid selection multiple search  dropdown">-->
-              <div class="ui fluid selection dropdown">
-                <input type="hidden" name="grade.id" th:value="*{grade}!=null ? *{grade.id}">
+              <div class="ui fluid selection multiple search  dropdown">
+<!--              <div class="ui fluid selection  dropdown">-->
+                <input type="hidden" name="gradeIds" th:value="*{gradeIds}">
                 <i class="dropdown icon"></i>
                 <div class="default text">等级</div>
                 <div class="menu">

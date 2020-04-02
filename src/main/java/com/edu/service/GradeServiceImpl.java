@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +25,7 @@ public class GradeServiceImpl implements GradeService{
     @Autowired
     GradeRepository repository;
 
+    @Transactional
     @Override
     public Grade getGrade(Long id) {
         return repository.getOne(id);
@@ -44,6 +45,24 @@ public class GradeServiceImpl implements GradeService{
     @Override
     public List<Grade> listGrade() {
         return repository.findAll();
+    }
+
+    // 来获取一组grade对象的集合
+    @Override
+    public List<Grade> listGrade(String ids) { // 1,2,3
+        return repository.findAllById(convertToList(ids));
+    }
+
+    // 数组转List
+    private List<Long> convertToList(String ids) {
+        List<Long> list = new ArrayList<>();
+        if (!"".equals(ids) && ids != null){
+            String[] idsarray = ids.split(",");
+            for (int i = 0; i < idsarray.length; i++) {
+                list.add(new Long(idsarray[i]));
+            }  
+        }
+        return list;
     }
 
 

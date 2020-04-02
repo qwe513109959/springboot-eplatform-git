@@ -19,6 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,8 +82,12 @@ public class EplatformServiceImpl implements EplatformService {
 
     @Transactional
     @Override
-    public EnglishPlatform saveEplatform(EnglishPlatform englishPlatform) {
-        return repository.save(englishPlatform);
+    public EnglishPlatform saveEplatform(EnglishPlatform e) {
+        // 设置默认值：阅览0次
+        e.setCreateTime(new Date());
+        e.setUpdateTime(new Date());
+        e.setViews(0);
+        return repository.save(e);
     }
 
     @Transactional

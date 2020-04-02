@@ -3,6 +3,8 @@ package com.edu.dao;
 import com.edu.pojo.Grade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * @program: spring-boot-eplatform-01
  * @description:
@@ -12,4 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface GradeRepository  extends JpaRepository<Grade,Long> {
 
     Grade findGradeByName(String name);
+
 }

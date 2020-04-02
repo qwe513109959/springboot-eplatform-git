@@ -69,6 +69,7 @@
               <button id="clear-btn" class="ui compact button">clear</button>
             </div>
 
+
           </div>
           <div class="field">
             <div class="ui checkbox">
@@ -108,7 +109,15 @@
               mappedBy = "edu_type"
               类名.mappedBy.属性
             -->
-            <td th:text="${eplatform.edu_type.name}">认知升级</td>
+<!--            <td th:each="type : ${types}"></td>-->
+            <td th:text="${eplatform.edu_type.name}"></td>
+<!-- 智障错误，搞了我2个小时，还是改回了原样   -->
+<!--            <td th:text="${eplatform.edu_type_id}"></td>-->
+<!--            <td th:text="${eplatform.type.name}"></td>-->
+<!--            <td th:text="${eplatform.types.name}">aaaa</td>-->
+<!--            <td th:text="${eplatform.edutype.name}">shisss</td>-->
+<!--            <td th:text="${eplatform.edu_type.name}}">i Need some thing</td>-->
+<!--            <td>认知升级</td>-->
             <td th:text="${eplatform.recommend} ? '是':'否'">是</td>
             <td th:text="${eplatform.published} ? '发布':'草稿'">草稿</td>
             <td th:text="${eplatform.updateTime}">2017-10-02 09:45</td>
@@ -201,6 +210,7 @@
           .transition('fade');
       });
 
+    // clear清除title内容的按钮
     $('#clear-btn')
       .on('click', function() {
         $('.ui.type.dropdown')
@@ -215,6 +225,7 @@
     }
 
     $("#search-btn").click(function () {
+      // 设置页面page=0，即查询全部数据
       $("[name='page']").val(0);
       loaddata();
     });

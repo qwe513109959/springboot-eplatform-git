@@ -1,21 +1,21 @@
 package com.edu.web.admin;
 
 import com.edu.pojo.EnglishPlatform;
+import com.edu.pojo.User;
 import com.edu.service.EduTypesService;
 import com.edu.service.EplatformService;
 import com.edu.service.GradeService;
 import com.edu.vo.EplatformQuery;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -37,18 +37,18 @@ public class EplatformController {
     @Autowired
     GradeService gradeService;
 
-
     /** 
     * @Description: 去EplatformList页面
     * @Param:  
     * @Author: Mr.Jia 
     * @Date: 2020/4/1 2:12 下午 
     */ 
-    @RequestMapping(value = "/eplatform", method = RequestMethod.GET)
-    public String toeplatform(@PageableDefault(size = 3, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+    @GetMapping("/eplatform")
+    public String toeplatform(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
                               EplatformQuery eplatform,
                               Model model) {
         model.addAttribute("types", eduTypesService.listEduType());
+        model.addAttribute("eplatform", eduTypesService.listEduType());
         model.addAttribute("page", eplatformService.listEplatform(pageable, eplatform));
         return LIST;
     }
@@ -60,7 +60,7 @@ public class EplatformController {
     * @Date: 2020/4/1 2:13 下午 
     */ 
     @RequestMapping(value = "/eplatform/search", method = RequestMethod.POST)
-    public String search(@PageableDefault(size = 2, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          Model model,
                          EplatformQuery query){
         model.addAttribute("page", eplatformService.listEplatform(pageable, query));
@@ -84,15 +84,75 @@ public class EplatformController {
         return "admin/eplatform-input";
     }
 
+    // 测试test
     @GetMapping("/eplatform/inputtest")
     public String input() {
         return "admin/blogs-input";
     }
-    /** 
-    * @Description:
+
+    /**
+    * @Description: 新增数据
     * @Param:  
     * @Author: Mr.Jia 
     * @Date: 2020/4/1 2:49 下午 
     */ 
+    @PostMapping("/eplatform")
+    public String increatEplatform( EnglishPlatform eplatform,
+                                    HttpSession session,
+                                    RedirectAttributes attributes){
+        eplatform.setUser((User) session.getAttribute("user"));
+        eplatform.setEdu_type(eduTypesService.getEduType(eplatform.getEdu_type().getId()));
+        eplatform.setGrade(gradeService.listGrade(eplatform.getGradeIds()));
+
+        EnglishPlatform e = eplatformService.saveEplatform(eplatform);
+        if (e == null) {
+            attributes.addFlashAttribute("message", "操作失败");
+        } else {
+            attributes.addFlashAttribute("message", "操作成功");
+        }
+
+        return "redirect:/admin/eplatform";
+    }
+
+    /** 
+    * @Description: 共用代码片段
+    * @Param:  
+    * @Author: Mr.Jia 
+    * @Date: 2020/4/2 5:04 下午 
+    */ 
+    public void setTypeAndGrade(Model model) {
+        model.addAttribute("types", eduTypesService.listEduType());
+        model.addAttribute("grades", gradeService.listGrade());
+    }
+
+    /**
+     * @Description: 编辑内容
+     * @Param:
+     * @Author: Mr.Jia
+     * @Date: 2020/4/2 4:57 下午
+     */
+    @GetMapping("/eplatform/{id}/input")
+    public String editInput(@PathVariable Long id,
+                            RedirectAttributes attributes,
+                            Model model) {
+        setTypeAndGrade(model);
+        EnglishPlatform eplatform = eplatformService.getEplatform(id);
+        eplatform.init();
+        model.addAttribute("eplatform", eplatform);
+        return "admin/eplatform-input";
+    }
+
+    /**
+    * @Description: 删除
+    * @Param:
+    * @Author: Mr.Jia
+    * @Date: 2020/4/2 5:02 下午
+    */
+    @GetMapping("/eplatform/{id}/delete")
+    public String delete(@PathVariable Long id,RedirectAttributes attributes) {
+        eplatformService.deleteEplatform(id);
+        attributes.addFlashAttribute("message", "删除成功");
+        return "redirect:/admin/eplatform";
+    }
 
 }

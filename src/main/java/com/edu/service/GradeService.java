@@ -23,6 +23,8 @@ public interface GradeService {
 
     List<Grade> listGrade();
 
+    List<Grade> listGrade(String ids);
+
     Grade saveGrade(Grade grade);
 
     Grade updateGrade(Long id, Grade grade);

@@ -1,7 +1,6 @@
 package com.edu.pojo;
 
 import javax.persistence.*;
-import javax.xml.stream.events.Comment;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +20,10 @@ public class EnglishPlatform {
     private Long id;
 
     private String title;
+
+    // 大数据类型加的注释,等同于Long
+    @Basic
+    @Lob
     private String content;
     private String firstPicture;
     private String flag;
@@ -38,15 +41,22 @@ public class EnglishPlatform {
     @ManyToOne
     private EduTypes edu_type;
 
-    @ManyToOne
-    private Grade grade;
+//    @ManyToOne
+//    private Grade grade;
+
+    // 多对多关系，多个级别
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    private List<Grade> grade = new ArrayList<>();
 
     @ManyToOne
     private User user;
 
+    // 不会进入数据库
+    @Transient
+    private String gradeIds;
+
 //    @OneToMany(mappedBy = "eplatform")
 //    private List<Comment> comment = new ArrayList<>();
-
 
     //   List comments
 //   List tags
@@ -75,6 +85,30 @@ public class EnglishPlatform {
                 ", user=" + user +
                 '}';
     }
+
+    public void init() {
+        this.gradeIds = tagsToIds(this.getGrade());
+    }
+
+    //1,2,3
+    private String tagsToIds(List<Grade> tags) {
+        if (!tags.isEmpty()) {
+            StringBuffer ids = new StringBuffer();
+            boolean flag = false;
+            for (Grade tag : tags) {
+                if (flag) {
+                    ids.append(",");
+                } else {
+                    flag = true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        } else {
+            return gradeIds;
+        }
+    }
+
 
     public Long getId() {
         return id;
@@ -196,11 +230,28 @@ public class EnglishPlatform {
         this.user = user;
     }
 
-    public Grade getGrade() {
+//    public Grade getGrade() {
+//        return grade;
+//    }
+//
+//    public void setGrade(Grade grade) {
+//        this.grade = grade;
+//    }
+
+
+    public List<Grade> getGrade() {
         return grade;
     }
 
-    public void setGrade(Grade grade) {
+    public void setGrade(List<Grade> grade) {
         this.grade = grade;
+    }
+
+    public String getGradeIds() {
+        return gradeIds;
+    }
+
+    public void setGradeIds(String gradeIds) {
+        this.gradeIds = gradeIds;
     }
 }

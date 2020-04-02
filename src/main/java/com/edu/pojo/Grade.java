@@ -21,7 +21,10 @@ public class Grade {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "grade")
+//    @OneToMany(mappedBy = "grade")
+//    private List<EnglishPlatform> englishPlatforms = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "grade")
     private List<EnglishPlatform> englishPlatforms = new ArrayList<>();
 
     public Grade() {
