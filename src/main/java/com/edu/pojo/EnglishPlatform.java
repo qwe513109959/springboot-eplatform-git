@@ -26,7 +26,6 @@ public class EnglishPlatform {
     @Lob
     private String content;
     private String firstPicture;
-    private String flag;
     private Integer views;
     private boolean appreciation;
     private boolean shareStatement;
@@ -61,6 +60,8 @@ public class EnglishPlatform {
     //   List comments
 //   List tags
 
+    private String description;
+
 
     public EnglishPlatform() {
     }
@@ -72,7 +73,6 @@ public class EnglishPlatform {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", firstPicture='" + firstPicture + '\'' +
-                ", flag='" + flag + '\'' +
                 ", views=" + views +
                 ", appreciation=" + appreciation +
                 ", shareStatement=" + shareStatement +
@@ -87,11 +87,11 @@ public class EnglishPlatform {
     }
 
     public void init() {
-        this.gradeIds = tagsToIds(this.getGrade());
+        this.gradeIds = gradesToIds(this.getGrade());
     }
 
     //1,2,3
-    private String tagsToIds(List<Grade> tags) {
+    private String gradesToIds(List<Grade> tags) {
         if (!tags.isEmpty()) {
             StringBuffer ids = new StringBuffer();
             boolean flag = false;
@@ -140,14 +140,6 @@ public class EnglishPlatform {
 
     public void setFirstPicture(String firstPicture) {
         this.firstPicture = firstPicture;
-    }
-
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
     }
 
     public Integer getViews() {
@@ -253,5 +245,13 @@ public class EnglishPlatform {
 
     public void setGradeIds(String gradeIds) {
         this.gradeIds = gradeIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

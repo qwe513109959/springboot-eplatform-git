@@ -4,6 +4,7 @@ import com.edu.NotFoundExcepiton;
 import com.edu.dao.EplatformRepository;
 import com.edu.pojo.EduTypes;
 import com.edu.pojo.EnglishPlatform;
+import com.edu.util.MyBeanUtils;
 import com.edu.vo.EplatformQuery;
 import org.hibernate.query.criteria.internal.predicate.BooleanAssertionPredicate;
 import org.springframework.beans.BeanUtils;
@@ -83,22 +84,30 @@ public class EplatformServiceImpl implements EplatformService {
     @Transactional
     @Override
     public EnglishPlatform saveEplatform(EnglishPlatform e) {
-        // 设置默认值：阅览0次
-        e.setCreateTime(new Date());
-        e.setUpdateTime(new Date());
-        e.setViews(0);
+        if (e.getId() == null) {
+            // 设置默认值：阅览0次
+            e.setCreateTime(new Date());
+            e.setUpdateTime(new Date());
+            e.setViews(0);
+        } else {
+            e.setUpdateTime(new Date());
+        }
         return repository.save(e);
     }
 
     @Transactional
     @Override
     public EnglishPlatform updateEplatform(Long id, EnglishPlatform englishPlatform) {
-        EnglishPlatform one = repository.findById(id).get();
-        if (one == null) {
+        EnglishPlatform e = repository.findById(id).get();
+        if (e == null) {
             throw new NotFoundExcepiton("该平台内容不存在");
         }
-        BeanUtils.copyProperties(englishPlatform, one);
-        return repository.save(one);
+        // 把传过来的englishPlatform的值 赋值给已有的e对象
+        // 过滤掉属性值为空的属性，只copy englishPlatform里有值的属性 到e
+        // copyProperties(数据源，赋值对象)
+        BeanUtils.copyProperties(englishPlatform, e, MyBeanUtils.getNullPropertyNames(englishPlatform));
+        e.setUpdateTime(new Date());
+        return repository.save(e);
     }
 
     @Transactional

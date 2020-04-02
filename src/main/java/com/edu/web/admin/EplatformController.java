@@ -103,8 +103,13 @@ public class EplatformController {
         eplatform.setUser((User) session.getAttribute("user"));
         eplatform.setEdu_type(eduTypesService.getEduType(eplatform.getEdu_type().getId()));
         eplatform.setGrade(gradeService.listGrade(eplatform.getGradeIds()));
+        EnglishPlatform e;
+        if (eplatform.getId() == null) {
+            e = eplatformService.saveEplatform(eplatform);
+        } else {
+            e = eplatformService.updateEplatform(eplatform.getId(), eplatform);
+        }
 
-        EnglishPlatform e = eplatformService.saveEplatform(eplatform);
         if (e == null) {
             attributes.addFlashAttribute("message", "操作失败");
         } else {
