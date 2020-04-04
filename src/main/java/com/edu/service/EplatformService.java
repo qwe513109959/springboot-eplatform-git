@@ -5,6 +5,8 @@ import com.edu.vo.EplatformQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @program: spring-boot-eplatform-01
  * @description:
@@ -16,6 +18,10 @@ public interface EplatformService {
     EnglishPlatform getEplatform(Long id);
 
     Page<EnglishPlatform> listEplatform(Pageable pageable, EplatformQuery query);
+
+    Page<EnglishPlatform> listEplatform(Pageable pageable);
+
+    List<EnglishPlatform> listRecommendEplatformTop(Integer size);
 
     EnglishPlatform saveEplatform(EnglishPlatform englishPlatform);
 

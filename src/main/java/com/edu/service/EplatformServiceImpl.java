@@ -1,6 +1,6 @@
 package com.edu.service;
 
-import com.edu.NotFoundExcepiton;
+import com.edu.NotFoundException;
 import com.edu.dao.EplatformRepository;
 import com.edu.pojo.EduTypes;
 import com.edu.pojo.EnglishPlatform;
@@ -10,7 +10,9 @@ import org.hibernate.query.criteria.internal.predicate.BooleanAssertionPredicate
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,6 +83,30 @@ public class EplatformServiceImpl implements EplatformService {
         }, pageable);
     }
 
+    /** 
+    * @Description: 分页查询参数
+    * @Param:  
+    * @Author: Mr.Jia 
+    * @Date: 2020/4/4 6:20 下午 
+    */ 
+    @Override
+    public Page<EnglishPlatform> listEplatform(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+    
+    /** 
+    * @Description: Jpa；按更新时间排序
+    * @Param:  
+    * @Author: Mr.Jia 
+    * @Date: 2020/4/4 6:16 下午 
+    */ 
+    @Override
+    public List<EnglishPlatform> listRecommendEplatformTop(Integer size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = PageRequest.of(0, size, sort);
+        return repository.findTop(pageable);
+    }
+
     @Transactional
     @Override
     public EnglishPlatform saveEplatform(EnglishPlatform e) {
@@ -100,7 +126,7 @@ public class EplatformServiceImpl implements EplatformService {
     public EnglishPlatform updateEplatform(Long id, EnglishPlatform englishPlatform) {
         EnglishPlatform e = repository.findById(id).get();
         if (e == null) {
-            throw new NotFoundExcepiton("该平台内容不存在");
+            throw new NotFoundException("该平台内容不存在");
         }
         // 把传过来的englishPlatform的值 赋值给已有的e对象
         // 过滤掉属性值为空的属性，只copy englishPlatform里有值的属性 到e

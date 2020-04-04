@@ -1,12 +1,14 @@
 package com.edu.service;
 
+import com.edu.NotFoundException;
 import com.edu.dao.EduTypesRepository;
 import com.edu.pojo.EduTypes;
-import javassist.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +52,21 @@ public class EduTypesServiceImpl implements EduTypesService {
     @Override
     public List<EduTypes> listEduType() {
         return repository.findAll();
+    }
+
+    /**
+     * @Description: Jpa实现Sort排序
+     * @Param:
+     * @Author: Mr.Jia
+     * @Date: 2020/4/3 4:50 下午
+     */
+    @Transactional
+    @Override
+    public List<EduTypes> listEduTypeTop(Integer size) {
+        // properties：bean类中的字段
+        Sort sort = Sort.by(Sort.Direction.DESC,"englishPlatforms.size");
+        Pageable pageable = PageRequest.of(0, size, sort);
+        return repository.findTop(pageable);
     }
 
     @Transactional

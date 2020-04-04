@@ -24,6 +24,8 @@ public interface EduTypesService {
 
     List<EduTypes> listEduType();
 
+    List<EduTypes> listEduTypeTop(Integer size);
+
     EduTypes updateEduType(Long id, EduTypes type);
 
     void deleteEduType(Long id);

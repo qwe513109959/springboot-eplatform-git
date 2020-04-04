@@ -1,7 +1,9 @@
 package com.edu.dao;
 
 import com.edu.pojo.Grade;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -14,5 +16,9 @@ import java.util.List;
 public interface GradeRepository  extends JpaRepository<Grade,Long> {
 
     Grade findGradeByName(String name);
+
+    @Query("select g from Grade g")
+    List<Grade> findTop(Pageable pageable);
+
 
 }

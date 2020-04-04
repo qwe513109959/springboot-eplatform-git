@@ -16,7 +16,7 @@ import java.util.Map;
 @Controller
 public class HelloController {
 
-    @GetMapping("/")
+    @GetMapping("/helloIndex")
     public String index(){
         //int i = 9 / 0;
         return "index";

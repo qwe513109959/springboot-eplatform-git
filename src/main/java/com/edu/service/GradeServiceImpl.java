@@ -1,12 +1,14 @@
 package com.edu.service;
 
-import com.edu.NotFoundExcepiton;
+import com.edu.NotFoundException;
 import com.edu.dao.GradeRepository;
 import com.edu.pojo.Grade;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +55,13 @@ public class GradeServiceImpl implements GradeService{
         return repository.findAllById(convertToList(ids));
     }
 
+    @Override
+    public List<Grade> listGradeTop(Integer size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "englishPlatforms.size");
+        Pageable pageable = PageRequest.of(0, size, sort);
+        return repository.findTop(pageable);
+    }
+
     // 数组转List
     private List<Long> convertToList(String ids) {
         List<Long> list = new ArrayList<>();
@@ -78,8 +87,8 @@ public class GradeServiceImpl implements GradeService{
         Grade grade1 = repository.findById(id).get();
         if (grade1 == null) {
             try {
-                throw new NotFoundExcepiton("不存在该等级");
-            } catch (NotFoundExcepiton e) {
+                throw new NotFoundException("不存在该等级");
+            } catch (NotFoundException e) {
                 e.printStackTrace();
             }
         }

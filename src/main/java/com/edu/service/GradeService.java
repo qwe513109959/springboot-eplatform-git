@@ -25,6 +25,8 @@ public interface GradeService {
 
     List<Grade> listGrade(String ids);
 
+    List<Grade> listGradeTop(Integer size);
+
     Grade saveGrade(Grade grade);
 
     Grade updateGrade(Long id, Grade grade);
