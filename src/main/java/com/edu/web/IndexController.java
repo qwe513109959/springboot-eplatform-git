@@ -30,9 +30,6 @@ public class IndexController {
     EduTypesService eduTypesService;
 
     @Autowired
-    IndexService indexService;
-
-    @Autowired
     GradeService gradeService;
 
     @GetMapping("/index")
@@ -64,7 +61,7 @@ public class IndexController {
     */ 
     @GetMapping("/eplatform/{id}")
     public String blog(@PathVariable Long id, Model model) {
-        model.addAttribute("eplatform", indexService.getAndConvert(id));
+        model.addAttribute("eplatform", eplatformService.getAndConvert(id));
         return "eplatform";
     }
 
