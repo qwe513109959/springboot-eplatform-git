@@ -39,19 +39,18 @@ public class EplatformServiceImpl implements EplatformService {
     @Autowired
     EplatformRepository repository;
 
-
     @Override
     public EnglishPlatform getEplatform(Long id) {
         return repository.getOne(id);
     }
 
-    
-    /** 
-    * @Description: Markdown转HTML
-    * @Param: 
-    * @Author: Mr.Jia 
-    * @Date: 2020/4/5 12:06 下午 
-    */ 
+    /**
+     * @Description: Markdown转HTML，详情页面
+     * @Param:
+     * @Author: Mr.Jia
+     * @Date: 2020/4/5 12:06 下午
+     */
+    @Transactional
     @Override
     public EnglishPlatform getAndConvert(Long id) {
         EnglishPlatform eplatform = repository.getOne(id);
@@ -63,6 +62,8 @@ public class EplatformServiceImpl implements EplatformService {
         BeanUtils.copyProperties(eplatform, eplatform1);
         String content = eplatform1.getContent();
         eplatform1.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        // 更新查看次数Views+1
+        repository.updateViews(id);
         return eplatform1;
     }
 

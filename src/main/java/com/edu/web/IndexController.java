@@ -1,6 +1,5 @@
 package com.edu.web;
 
-import com.edu.pojo.EnglishPlatform;
 import com.edu.service.EduTypesService;
 import com.edu.service.EplatformService;
 import com.edu.service.GradeService;
@@ -29,6 +28,9 @@ public class IndexController {
 
     @Autowired
     EduTypesService eduTypesService;
+
+    @Autowired
+    IndexService indexService;
 
     @Autowired
     GradeService gradeService;
@@ -62,7 +64,7 @@ public class IndexController {
     */ 
     @GetMapping("/eplatform/{id}")
     public String blog(@PathVariable Long id, Model model) {
-        model.addAttribute("eplatform", eplatformService.getAndConvert(id));
+        model.addAttribute("eplatform", indexService.getAndConvert(id));
         return "eplatform";
     }
 

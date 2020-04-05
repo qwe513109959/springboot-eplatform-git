@@ -67,14 +67,17 @@
       <br>
       <!--中间主要内容部分-->
       <!-- th:utext 不转义，要不然<table>标签 就转成文字了 -->
+      <!-- 生成目录 class="js-toc-content" -->
       <div id="content" class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:utext="${eplatform.content}">
 
+        <!--/*-->
         <!-- 对<h1>标签做了处理，生成目录-->
         <h2 id="section1">一、关于 <i class="serif">Typo.css</i></h2>
 
         <pre><code class="language-css">p { color: red }</code></pre>
 
         <pre><code class="language-css">p { color: red }</code></pre>
+
 
         <p><i class="serif">Typo.css</i> 的目的是，在一致化浏览器排版效果的同时，构建最适合中文阅读的网页排版。</p>
         <h4 >现状和如何去做：</h4>
@@ -428,7 +431,7 @@ h5,h6{font-size:1em;}
         </table>
 
         <h5 id="appendix2">2、开源许可</h5>
-
+        <!--*/-->
       </div>
 
       <!--标签-->
@@ -481,12 +484,12 @@ h5,h6{font-size:1em;}
             <h3 class="ui dividing header">评论</h3>
             <div class="comment" th:each="comment : ${comments}">
               <a class="avatar">
-                <img src="https://unsplash.it/100/100?image=1005" th:src="@{${comment.avatar}}">
+                <img src="https://picsum.photos/200/300?grayscale" th:src="@{${comment.avatar}}">
               </a>
               <div class="content">
                 <a class="author" >
                   <span th:text="${comment.nickname}">Matt</span>
-                  <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${comment.adminComment}">博主</div>
+                  <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${comment.adminComment}">管理员</div>
                 </a>
                 <div class="metadata">
                   <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
@@ -495,6 +498,10 @@ h5,h6{font-size:1em;}
                   How artistic!
                 </div>
                 <div class="actions">
+                  <!--  自定义的属性值：data-commentid="1"
+                        点击回复的时候，要拿到当前comment对象的id，作为下一个回复的parentId
+                        th:arrt="" 为自定义属性动态赋值
+                  -->
                   <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}" onclick="reply(this)">回复</a>
                 </div>
               </div>
@@ -506,7 +513,7 @@ h5,h6{font-size:1em;}
                   <div class="content">
                     <a class="author" >
                       <span th:text="${reply.nickname}">小红</span>
-                      <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">博主</div>
+                      <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">管理员</div>
                       &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">@ 小白</span>
                     </a>
                     <div class="metadata">
@@ -582,7 +589,7 @@ h5,h6{font-size:1em;}
         </div>
       </div>
       <div id="comment-form" class="ui form">
-        <input type="hidden" name="blog.id" th:value="${blog.id}">
+        <input type="hidden" name="eplatform.id" th:value="${eplatform.id}">
         <input type="hidden" name="parentComment.id" value="-1">
         <div class="field">
           <textarea name="content" placeholder="请输入评论信息..."></textarea>
@@ -591,6 +598,7 @@ h5,h6{font-size:1em;}
           <div class="field m-mobile-wide m-margin-bottom-small">
             <div class="ui left icon input">
               <i class="user icon"></i>
+              <!-- 管理员的标识  th:value -->
               <input type="text" name="nickname" placeholder="姓名" th:value="${session.user}!=null ? ${session.user.nickname}">
             </div>
           </div>
@@ -604,12 +612,12 @@ h5,h6{font-size:1em;}
             <button id="commentpost-btn" type="button" class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
+<!--目录结构-->
 <div id="toolbar" class="m-padded m-fixed m-right-bottom" style="display: none">
   <div class="ui vertical icon buttons ">
     <button type="button" class="ui toc teal button" >目录</button>
@@ -618,17 +626,13 @@ h5,h6{font-size:1em;}
     <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
   </div>
 </div>
-
 <div class="ui toc-container flowing popup transition hidden" style="width: 250px!important;">
   <ol class="js-toc">
-
   </ol>
 </div>
-
 <div id="qrcode" class="ui wechat-qr flowing popup transition hidden "style="width: 130px !important;">
   <!--<img src="./static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">-->
 </div>
-
 
 
 <br>
@@ -696,6 +700,7 @@ h5,h6{font-size:1em;}
     position: 'bottom center'
   });
 
+  // 目录插件初始化
   tocbot.init({
     // Where to render the table of contents.
     tocSelector: '.js-toc',
@@ -703,6 +708,8 @@ h5,h6{font-size:1em;}
     contentSelector: '.js-toc-content',
     // Which headings to grab inside of the contentSelector element.
     headingSelector: 'h1, h2, h3',
+    // For headings inside relative or absolute positioned containers within content.
+    hasInnerContainers: true,
   });
 
   $('.toc.button').popup({
@@ -774,10 +781,11 @@ h5,h6{font-size:1em;}
     }
   });
 
-  $(function () {
-    $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/6");
-  });
 
+  // 初始化完成后加载，调用/comments/{eplatformId}
+  $(function () {
+    $("#comment-container").load(/*[[@{/comments/{id}(id=${eplatform.id})}]]*/"comments/6");
+  });
 
 
   $('#commentpost-btn').click(function () {
@@ -794,11 +802,12 @@ h5,h6{font-size:1em;}
   function postData() {
     $("#comment-container").load(/*[[@{/comments}]]*/"",{
       "parentComment.id" : $("[name='parentComment.id']").val(),
-      "blog.id" : $("[name='blog.id']").val(),
+      "eplatform.id" : $("[name='eplatform.id']").val(),
       "nickname": $("[name='nickname']").val(),
       "email"   : $("[name='email']").val(),
       "content" : $("[name='content']").val()
     },function (responseTxt, statusTxt, xhr) {
+//      滚动到回复位置
 //        $(window).scrollTo($('#comment-container'),500);
       clearContent();
     });
@@ -811,11 +820,13 @@ h5,h6{font-size:1em;}
   }
 
 
+  // 回复的响应事件，默认回复的名，自己的id
   function reply(obj) {
     var commentId = $(obj).data('commentid');
     var commentNickname = $(obj).data('commentnickname');
     $("[name='content']").attr("placeholder", "@"+commentNickname).focus();
     $("[name='parentComment.id']").val(commentId);
+    // 滚动到回复位置；jquery.scrollTo平滑滚动
     $(window).scrollTo($('#comment-form'),500);
   }
 </script>

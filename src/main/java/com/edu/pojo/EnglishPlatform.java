@@ -47,6 +47,9 @@ public class EnglishPlatform {
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Grade> grade = new ArrayList<>();
 
+    @OneToMany(mappedBy = "eplatform")
+    private List<Comment> comments = new ArrayList<>();
+
     @ManyToOne
     private User user;
 
@@ -58,7 +61,7 @@ public class EnglishPlatform {
 //    private List<Comment> comment = new ArrayList<>();
 
     //   List comments
-//   List tags
+    //   List tags
 
     private String description;
 
