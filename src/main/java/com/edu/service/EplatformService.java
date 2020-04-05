@@ -17,7 +17,12 @@ public interface EplatformService {
 
     EnglishPlatform getEplatform(Long id);
 
+    EnglishPlatform getAndConvert(Long id);
+
     Page<EnglishPlatform> listEplatform(Pageable pageable, EplatformQuery query);
+
+    // String 类型的 query
+    Page<EnglishPlatform> listEplatform(String query, Pageable pageable);
 
     Page<EnglishPlatform> listEplatform(Pageable pageable);
 

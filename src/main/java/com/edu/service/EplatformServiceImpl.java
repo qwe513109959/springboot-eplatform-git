@@ -4,8 +4,10 @@ import com.edu.NotFoundException;
 import com.edu.dao.EplatformRepository;
 import com.edu.pojo.EduTypes;
 import com.edu.pojo.EnglishPlatform;
+import com.edu.util.MarkdownUtils;
 import com.edu.util.MyBeanUtils;
 import com.edu.vo.EplatformQuery;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.hibernate.query.criteria.internal.predicate.BooleanAssertionPredicate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +39,31 @@ public class EplatformServiceImpl implements EplatformService {
     @Autowired
     EplatformRepository repository;
 
+
     @Override
     public EnglishPlatform getEplatform(Long id) {
         return repository.getOne(id);
+    }
+
+    
+    /** 
+    * @Description: Markdown转HTML
+    * @Param: 
+    * @Author: Mr.Jia 
+    * @Date: 2020/4/5 12:06 下午 
+    */ 
+    @Override
+    public EnglishPlatform getAndConvert(Long id) {
+        EnglishPlatform eplatform = repository.getOne(id);
+        if (eplatform == null) {
+            throw new NotFoundException("该内容不存在getAndConvert");
+        }
+        EnglishPlatform eplatform1 = new EnglishPlatform();
+        // 将source赋值给target，保证源对象不会修改数据库的内容。将新对象改变内容传到详情页面
+        BeanUtils.copyProperties(eplatform, eplatform1);
+        String content = eplatform1.getContent();
+        eplatform1.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return eplatform1;
     }
 
     /**
@@ -81,6 +105,18 @@ public class EplatformServiceImpl implements EplatformService {
                 return null;
             }
         }, pageable);
+    }
+
+    
+    /** 
+    * @Description: String类型的query + 分页查询
+    * @Param:  
+    * @Author: Mr.Jia 
+    * @Date: 2020/4/4 7:37 下午 
+    */ 
+    @Override
+    public Page<EnglishPlatform> listEplatform(String query, Pageable pageable) {
+        return repository.findByQuery(query, pageable);
     }
 
     /** 

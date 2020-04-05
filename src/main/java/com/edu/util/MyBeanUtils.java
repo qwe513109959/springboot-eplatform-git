@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @program: spring-boot-eplatform-01
- * @description: 工具类；
+ * @description: 工具类；把传过来的englishPlatform的值 赋值给已有的e对象
  * @author: Mr.jia
  * @date: 2020-04-02 21:17
  **/

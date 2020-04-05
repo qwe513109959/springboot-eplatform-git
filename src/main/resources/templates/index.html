@@ -16,7 +16,7 @@
       <h2 class="ui teal header item">英语教学平台</h2>
       <a href="#" class=" m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
-      <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>级别</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini info icon"></i>关于我</a>
       <div class="right m-item item m-mobile-hide">
@@ -62,11 +62,11 @@
                   <div class="eleven wide column">
                     <div class="ui mini horizotntal link list">
                       <div class="item">
-                        <img src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
-                        <div class="content"><a href="#" class="header" >李仁密</a></div>
+                        <img src="https://unsplash.it/100/100?image=1005"  th:src="@{${eplatform.user.avatar}}" alt="" class="ui avatar image">
+                        <div class="content"><a href="#" class="header" th:text="${eplatform.user.nickname}" >jxh</a></div>
                       </div>
                       <div class="item">
-                        <i class="calendar icon"></i><span th:text="${#dates.format(eplatform.updateTime,'yyyy-MM-dd')}">2017-10-01</span>
+                        <i class="calendar icon"></i><span th:text="${#dates.format(eplatform.updateTime,'yyyy-MM-dd')}">2020-01-01</span>
                       </div>
                       <div class="item">
                         <i class="eye icon"></i> <span th:text="${eplatform.views}">2342</span>
@@ -463,12 +463,12 @@ type.eplatform
           </div>
         </div>
 
-        <!--标签-->
+        <!--级别-->
         <div class="ui segments m-margin-top-large">
           <div class="ui secondary segment">
             <div class="ui two column grid">
               <div class="column">
-                <i class="tags icon"></i>标签
+                <i class="tags icon"></i>级别
               </div>
               <div class="right aligned column">
                 <a href="#" target="_blank">more <i class="angle double right icon"></i></a>

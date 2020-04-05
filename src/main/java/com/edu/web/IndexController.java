@@ -11,6 +11,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @program: spring-boot-eplatform-01
@@ -31,17 +34,35 @@ public class IndexController {
     GradeService gradeService;
 
     @GetMapping("/index")
-    public String toInde(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String toInde(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          Model model) {
         model.addAttribute("page", eplatformService.listEplatform(pageable));
         model.addAttribute("types", eduTypesService.listEduTypeTop(6));
         model.addAttribute("grades", gradeService.listGradeTop(10));
         model.addAttribute("recommendEplatforms", eplatformService.listRecommendEplatformTop(8));
-        return "/index";
+        return "index";
     }
 
+    // 表单里定义的 字符串(query)
+    @PostMapping("/search")
+    public String tosearch(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+                           @RequestParam String query,
+                           Model model){
+        model.addAttribute("page", eplatformService.listEplatform("%"+query+"%", pageable));
+        model.addAttribute("query", query);
+        return "search";
+    }
+
+
+    /** 
+    * @Description: 详情页面；Markdown转HTML显示
+    * @Param: 
+    * @Author: Mr.Jia 
+    * @Date: 2020/4/5 1:23 下午
+    */ 
     @GetMapping("/eplatform/{id}")
-    public String blog() {
+    public String blog(@PathVariable Long id, Model model) {
+        model.addAttribute("eplatform", eplatformService.getAndConvert(id));
         return "eplatform";
     }
 

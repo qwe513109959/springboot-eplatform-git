@@ -46,6 +46,8 @@ public class EduTypesServiceImpl implements EduTypesService {
     @Transactional
     @Override
     public Page<EduTypes> listEduType(Pageable pageable) {
+//        Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
+//        Pageable pageable = PageRequest.of(10, 0, sort);
         return repository.findAll(pageable);
     }
 

@@ -84,12 +84,6 @@ public class EplatformController {
         return "admin/eplatform-input";
     }
 
-    // 测试test
-    @GetMapping("/eplatform/inputtest")
-    public String input() {
-        return "admin/blogs-input";
-    }
-
     /**
     * @Description: 新增数据
     * @Param:  
