@@ -18,7 +18,7 @@ import java.util.List;
 public class EduTypes {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty(message="name不能为空")

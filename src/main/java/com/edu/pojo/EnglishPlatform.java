@@ -16,7 +16,7 @@ import java.util.List;
 public class EnglishPlatform {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -56,12 +56,6 @@ public class EnglishPlatform {
     // 不会进入数据库
     @Transient
     private String gradeIds;
-
-//    @OneToMany(mappedBy = "eplatform")
-//    private List<Comment> comment = new ArrayList<>();
-
-    //   List comments
-    //   List tags
 
     private String description;
 

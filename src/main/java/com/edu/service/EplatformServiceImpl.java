@@ -19,13 +19,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.criteria.*;
+import java.util.*;
 
 /**
  * @program: spring-boot-eplatform-01
@@ -108,7 +103,34 @@ public class EplatformServiceImpl implements EplatformService {
         }, pageable);
     }
 
-    
+    @Override
+    public Page<EnglishPlatform> listEplatform(Long gradeId, Pageable pageable) {
+        return repository.findAll(new Specification<EnglishPlatform>() {
+            @Override
+            public Predicate toPredicate(Root<EnglishPlatform> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                Join join = root.join("grade");
+                return cb.equal(join.get("id"), gradeId);
+            }
+
+        }, pageable);
+    }
+
+    @Override
+    public Map<String, List<EnglishPlatform>> archiveEplatform() {
+        List<String> years = repository.findGroupYear();
+        Map<String, List<EnglishPlatform>> map = new HashMap<>();
+        for (String year : years) {
+            map.put(year, repository.findByYear(year));
+        }
+        return map;
+    }
+
+    @Override
+    public Long countEplatform() {
+        return repository.count();
+    }
+
+
     /** 
     * @Description: String类型的query + 分页查询
     * @Param:  

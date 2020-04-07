@@ -31,5 +31,13 @@ public interface EplatformRepository extends JpaRepository<EnglishPlatform, Long
     @Modifying
     @Query("update EnglishPlatform e set e.views=e.views+1 where e.id=?1")
     int updateViews(Long id);
+
+    // 获取年份分组
+    @Query("select function('date_format',e.updateTime,'%Y') as year from EnglishPlatform e group by function('date_format',e.updateTime,'%Y') order by year desc ")
+    List<String> findGroupYear();
+
+    // 拿到该年份所对应的列表
+    @Query("select e from EnglishPlatform e where function('date_format',e.updateTime,'%Y') = ?1")
+    List<EnglishPlatform> findByYear(String year);
 }
 
