@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @date: 2020-04-07 21:10
  **/
 @Controller
-public class ArchiveShowController {
+public class IndexArchiveController {
 
     @Autowired
     EplatformService eplatformService;

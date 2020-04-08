@@ -19,7 +19,7 @@ public class HelloController {
     @GetMapping("/helloIndex")
     public String index(){
         //int i = 9 / 0;
-        return "index";
+        return "hello";
     }
 
     @ResponseBody
@@ -35,16 +35,6 @@ public class HelloController {
         map.put("users", Arrays.asList("zhangsan", "lisi", "wangwu"));
         return "index";
     }
-
-    // 查出用户数据，在页面展示
-    @RequestMapping("/toss")
-    public String toss(Map<String, Object> map) {
-        map.put("hello", "<h1>你好</h1>");
-        map.put("users", Arrays.asList("zhangsan", "lisi", "wangwu"));
-        return "ss";
-    }
-
-
 
 
 }

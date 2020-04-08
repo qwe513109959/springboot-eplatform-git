@@ -428,13 +428,8 @@
           </div>
           <div class="ui teal segment">
             <div class="ui fluid vertical menu" >
-              <a href="#" class="item"  th:each="type : ${types}">
+              <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item"  th:each="type : ${types}">
                 <span th:text="${type.name}">学习日志</span>
-<!--
-type.eplatforms
-type.eplatform
-
--->
                 <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.englishPlatforms)}">13</div>
               </a>
               <!--/*-->
@@ -476,7 +471,7 @@ type.eplatform
             </div>
           </div>
           <div class="ui teal segment">
-            <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="grade : ${grades}">
+            <a href="#" th:href="@{/grade/{id}(id=${grade.id})}" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="grade : ${grades}">
               <span th:text="${grade.name}">方法论</span> <div class="detail" th:text="${#arrays.length(grade.englishPlatforms)}">23</div>
             </a>
             <!--/*-->
@@ -516,7 +511,7 @@ type.eplatform
           <div class="ui secondary segment ">
             <i class="bookmark icon"></i>最新推荐
           </div>
-          <div class="ui segment" th:each="eplatform : ${recommendEplatforms}">
+          <div class="ui segment"  th:each="eplatform : ${recommendEplatforms}">
             <a href="#" th:href="@{/eplatform/{id}(id=${eplatform.id})}" target="_blank" class="m-black m-text-thin" th:text="${eplatform.title}">用户故事（User Story）</a>
           </div>
           <!--/*-->
@@ -569,31 +564,36 @@ type.eplatform
           </div>
         </div>
       </div>
-      <div class="three wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced " >最新英语平台</h4>
-        <div class="ui inverted link list">
-          <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-          <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-          <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+      <div class="three wide column" >
+        <h4 class="ui inverted header m-text-thin m-text-spaced " >最新推荐</h4>
+        <div id="newList-container">
+          <div class="ui inverted link list" th:fragment="neweplatformList">
+            <a href="#" th:href="@{/eplatform/{id}(id=${eplatform.id})}" target="_blank" class="item m-text-thin" th:each="eplatform : ${neweplatforms}" th:text="${eplatform.title}">用户故事（User Story）</a>
+            <!--/*-->
+            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+            <!--*/-->
+          </div>
         </div>
       </div>
       <div class="three wide column">
         <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
         <div class="ui inverted link list">
-          <a href="#" class="item m-text-thin">Email：lirenmi@163.com</a>
-          <a href="#" class="item m-text-thin">QQ：865729312</a>
+          <a href="#" class="item m-text-thin" th:text="#{index.email}">Email：jxh_98@126.com</a>
+          <a href="#" class="item m-text-thin" th:text="#{index.qq}">QQ：513109959</a>
         </div>
       </div>
       <div class="seven wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced ">英语教学平台</h4>
-        <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的英语教学平台、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+        <h4 class="ui inverted header m-text-thin m-text-spaced ">Eplatform</h4>
+        <p class="m-text-thin m-text-spaced m-opacity-mini" th:text="#{index.eplatformDescription}">这是我的英语平台、会分享关于英语学习的相关内容</p>
       </div>
     </div>
     <div class="ui inverted section divider"></div>
-    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2016 - 2017 Lirenmi Designed by Lirenmi</p>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2020 jxh Designed by jxh</p>
   </div>
-
 </footer>
+
+
 <!--/*/<th:block th:replace="_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>

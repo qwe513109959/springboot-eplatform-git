@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @date: 2020-04-05 16:46
  **/
 @Controller
-public class CommentController {
+public class IndexCommentController {
 
 
     @Autowired

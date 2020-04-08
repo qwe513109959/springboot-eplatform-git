@@ -22,7 +22,7 @@ import java.util.List;
  * @date: 2020-04-06 15:14
  **/
 @Controller
-public class GradeShowController {
+public class IndexGradeController {
 
     @Autowired
     GradeService gradeService;

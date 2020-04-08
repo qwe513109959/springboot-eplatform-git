@@ -650,28 +650,32 @@ h5,h6{font-size:1em;}
           </div>
         </div>
       </div>
-      <div class="three wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced " >最新英语</h4>
-        <div class="ui inverted link list">
-          <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-          <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-          <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+      <div class="three wide column" >
+        <h4 class="ui inverted header m-text-thin m-text-spaced " >最新推荐</h4>
+        <div id="newList-container">
+          <div class="ui inverted link list" th:fragment="neweplatformList">
+            <a href="#" th:href="@{/eplatform/{id}(id=${eplatform.id})}" target="_blank" class="item m-text-thin" th:each="eplatform : ${neweplatforms}" th:text="${eplatform.title}">用户故事（User Story）</a>
+            <!--/*-->
+            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+            <!--*/-->
+          </div>
         </div>
       </div>
       <div class="three wide column">
         <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
         <div class="ui inverted link list">
-          <a href="#" class="item m-text-thin">Email：jxh_98@126.com</a>
-          <a href="#" class="item m-text-thin">QQ：865729312</a>
+          <a href="#" class="item m-text-thin" th:text="#{index.email}">Email：jxh_98@126.com</a>
+          <a href="#" class="item m-text-thin" th:text="#{index.qq}">QQ：513109959</a>
         </div>
       </div>
       <div class="seven wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced ">EnglishPlatform</h4>
-        <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人英语、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+        <h4 class="ui inverted header m-text-thin m-text-spaced ">Eplatform</h4>
+        <p class="m-text-thin m-text-spaced m-opacity-mini" th:text="#{index.eplatformDescription}">这是我的英语平台、会分享关于英语学习的相关内容</p>
       </div>
     </div>
     <div class="ui inverted section divider"></div>
-    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2016 - 2017 Lirenmi Designed by Lirenmi</p>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2020 jxh Designed by jxh</p>
   </div>
 </footer>
 
@@ -724,7 +728,7 @@ h5,h6{font-size:1em;}
   });
 
   // 扫码访问本页面
-  var serurl = "127.0.0.1:8080";
+  var serurl = /*[[#{eplatform.serurl}]]*/"127.0.0.1:8080";
   var url = /*[[@{/eplatform/{id}(id=${eplatform.id})}]]*/"";
   var qrcode = new QRCode("qrcode", {
     text: serurl+url,

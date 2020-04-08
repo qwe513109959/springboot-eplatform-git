@@ -17,4 +17,8 @@ spring:
   profiles:
     active: dev
 
+  # 国际化配置文件位置
+  messages:
+    basename: i18n/messages
+
 comment.avatar: /images/avatar.png

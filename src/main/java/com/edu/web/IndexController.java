@@ -1,5 +1,6 @@
 package com.edu.web;
 
+import com.edu.pojo.EnglishPlatform;
 import com.edu.service.EduTypesService;
 import com.edu.service.EplatformService;
 import com.edu.service.GradeService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * @program: spring-boot-eplatform-01
@@ -52,7 +54,6 @@ public class IndexController {
         return "search";
     }
 
-
     /** 
     * @Description: 详情页面；Markdown转HTML显示
     * @Param: 
@@ -64,5 +65,7 @@ public class IndexController {
         model.addAttribute("eplatform", eplatformService.getAndConvert(id));
         return "eplatform";
     }
+
+
 
 }
