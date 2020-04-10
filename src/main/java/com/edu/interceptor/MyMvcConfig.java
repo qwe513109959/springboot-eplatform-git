@@ -10,17 +10,15 @@ import org.springframework.web.servlet.config.annotation.*;
  * @date: 2020-03-26 17:25
  **/
 @Configuration
-public class MyWebMvcConfigurer implements WebMvcConfigurer {
+public class MyMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 
-//        registry.addViewController("/tologin").setViewName("tologin");
-        registry.addViewController("/register").setViewName("register");
         //添加url路径，设置url对应的页面
         //访问http://localhost:8080/toIndex，请求转发到http://localhost:8080/index这个页面
         registry.addViewController("/toIndex").setViewName("index");
-        registry.addViewController("/header").setViewName("header");
+        registry.addViewController("/main.html").setViewName("admin/dashboard");
 
          /*
         这个是重定向，比如访问http://localhost:8080，

@@ -23,12 +23,12 @@ public class IndexLoginController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/tologin")
+    @GetMapping("/toindexlogin")
     public String loginPage() {
-        return "admin/login";
+        return "/login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/indexlogin")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         HttpSession session,
@@ -45,13 +45,13 @@ public class IndexLoginController {
         }
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/indexlogout")
     public String logout(HttpSession session){
         session.removeAttribute("user");
         return "redirect:/admin";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/index1")
     public String index(HttpSession session){
         return "admin/index";
     }

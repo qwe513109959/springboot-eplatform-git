@@ -4,10 +4,19 @@ spring:
     url: jdbc:mysql://localhost:3306/springboot_eplatform?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
+
+  # mybatis + Jpa
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  mybatis:
+    config-location: classpath:mybatis/mybatis-config.xml
+    mapper-locations: classpath:mybatis/mapper/*.xml
+    type-aliases-package: com.wu.parker.jpamybatis
+
+
 
 logging:
   level:
