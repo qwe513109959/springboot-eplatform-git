@@ -13,4 +13,5 @@ public interface UserService {
 
    public User checkUser(String username, String password);
 
+   public User getUserById(Long id);
 }

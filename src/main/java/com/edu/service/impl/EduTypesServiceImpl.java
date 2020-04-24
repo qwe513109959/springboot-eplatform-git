@@ -1,8 +1,9 @@
-package com.edu.service;
+package com.edu.service.impl;
 
 import com.edu.NotFoundException;
 import com.edu.dao.EduTypesRepository;
 import com.edu.pojo.EduTypes;
+import com.edu.service.EduTypesService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

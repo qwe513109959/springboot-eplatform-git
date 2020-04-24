@@ -1,9 +1,10 @@
-package com.edu.service;
+package com.edu.service.impl;
 
 import com.edu.NotFoundException;
 import com.edu.dao.EplatformRepository;
 import com.edu.pojo.EduTypes;
 import com.edu.pojo.EnglishPlatform;
+import com.edu.service.EplatformService;
 import com.edu.util.MarkdownUtils;
 import com.edu.util.MyBeanUtils;
 import com.edu.vo.EplatformQuery;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.dao.mapper.UserMapper">
+<!--    public User getUserById(Long id);-->
+    <select id="getUserById" resultType="com.edu.pojo.User">
+        SELECT * FROM tbl_user WHERE id=#{id}
+    </select>
+
+<!--    public void insertUser(User user);-->
+<!--    public void deleteUser(Long id);-->
+<!--    public void editUser(User user);-->
+
+
+</mapper>

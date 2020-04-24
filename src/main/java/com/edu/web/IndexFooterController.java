@@ -19,11 +19,9 @@ public class IndexFooterController {
     @Autowired
     EplatformService eplatformService;
 
-
     @GetMapping("/footer/newList")
     public String aboutfooter(Model model){
         model.addAttribute("neweplatforms", eplatformService.listRecommendEplatformTop(3));
-        System.out.println("我是AAA");
         return "_fragments :: neweplatformList";
     }
 

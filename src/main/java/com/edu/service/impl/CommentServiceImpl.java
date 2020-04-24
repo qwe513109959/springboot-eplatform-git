@@ -1,7 +1,8 @@
-package com.edu.service;
+package com.edu.service.impl;
 
 import com.edu.dao.CommentRepository;
 import com.edu.pojo.Comment;
+import com.edu.service.CommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

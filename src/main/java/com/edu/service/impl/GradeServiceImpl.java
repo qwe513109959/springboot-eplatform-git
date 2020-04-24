@@ -1,8 +1,9 @@
-package com.edu.service;
+package com.edu.service.impl;
 
 import com.edu.NotFoundException;
 import com.edu.dao.GradeRepository;
 import com.edu.pojo.Grade;
+import com.edu.service.GradeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ import java.util.List;
  * @date: 2020-03-31 19:10
  **/
 @Service
-public class GradeServiceImpl implements GradeService{
+public class GradeServiceImpl implements GradeService {
 
     @Autowired
     GradeRepository repository;

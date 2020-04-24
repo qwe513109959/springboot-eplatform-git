@@ -5,7 +5,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
- * @program: spring-boot-eplatform
+ * @program: spring-boot-eplatform-01
  * @description:
  * @author: Mr.jia
  * @date: 2020-04-10 17:30
