@@ -20,7 +20,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         //添加url路径，设置url对应的页面
         //访问http://localhost:8080/toIndex，请求转发到http://localhost:8080/index这个页面
         registry.addViewController("/toIndex").setViewName("index");
-        registry.addViewController("/main.html").setViewName("/admin/dashboard");
+//        registry.addViewController("/admin/dashboard.html").setViewName("/admin/dashboard");
 
          /*
         这个是重定向，比如访问http://localhost:8080，

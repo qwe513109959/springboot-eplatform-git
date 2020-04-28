@@ -13,9 +13,9 @@ import java.util.Date;
 
 public class Student {
 
-    private Long id;
+    private Integer id;
     private String nickname;
-    private String username;
+    private String sno;
     private String password;
     private String email;
     private String avatar;
@@ -26,11 +26,11 @@ public class Student {
     public Student() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,12 +42,12 @@ public class Student {
         this.nickname = nickname;
     }
 
-    public String getUsername() {
-        return username;
+    public String getSno() {
+        return sno;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setSno(String sno) {
+        this.sno = sno;
     }
 
     public String getPassword() {
@@ -103,7 +103,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
-                ", username='" + username + '\'' +
+                ", username='" + sno + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", avatar='" + avatar + '\'' +

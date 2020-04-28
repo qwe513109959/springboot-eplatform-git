@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @program: spring-boot-eplatform
- * @description:
+ * @description: 评论
  * @author: Mr.jia
  * @date: 2020-04-05 17:06
  **/

@@ -18,20 +18,18 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @program: spring-boot-eplatform
- * @description:
+ * @description: 评论
  * @author: Mr.jia
  * @date: 2020-04-05 16:46
  **/
 @Controller
 public class IndexCommentController {
 
-
     @Autowired
     CommentService commentService;
 
     @Autowired
     EplatformService eplatformService;
-
 
     @Value("${comment.avatar}")
     private String avatar;

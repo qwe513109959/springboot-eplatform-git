@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英语平台注册</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+
+<br>
+<br>
+<br>
+<div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+  <div class="ur container">
+    <div class="ui middle aligned center aligned grid">
+      <div class="column">
+        <h2 class="ui teal image header">
+          <div class="content">
+            用户注册
+          </div>
+        </h2>
+        <form class="ui large form" method="post" actiogetn="#" th:action="@{/addStudent}">
+          <div class="ui  segment">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="nickname" placeholder="用户名">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="sno" placeholder="学号">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="password" placeholder="密码">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="repassword" placeholder="确认密码">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="email" placeholder="email">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="avatar" placeholder="avatar">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="type" placeholder="type">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="create_time" placeholder="create_time">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="update_time" placeholder="update_time">
+              </div>
+            </div>
+
+            <button class="ui fluid large teal submit button">注   册</button>
+          </div>
+
+          <div class="ui error mini message"></div>
+          <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}"  th:text="${message}">错误</div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+<script>
+  $(function(){
+    alert("你好，我是一个警告框！");
+    //为输入框绑定事件
+    $("#sno").blur(function(){
+      //1、失去焦点获得输入框的内容
+      var snoInput = $(this).val();
+
+      //2、去服务端校验该用户名是否存在---ajax
+      $.post(
+              "${pageContext.request.contextPath}/indexlogin/checkSno",
+              {"sno":snoInput},
+              function(data){
+
+                var isExist = data.isExist;
+                //3、根据返回的isExist动态的显示信息
+
+                var snoInfo = "";
+                if(!snoInput){
+                  snoInfo = "学号不能为空";
+                  $("#snoInfo").css("color","red");
+                }
+                else{
+                  if(isExist){
+                    //该用户存在
+                    snoInfo = "该学号已被注册";
+                    $("#snoInfo").css("color","red");
+                  }else{
+                    snoInfo = "该学号可以使用"
+                    $("#snoInfo").css("color","green");
+                  }
+                }
+                $("#snoInfo").html(snoInfo);
+              },
+              "json"
+      );
+    });
+  });
+
+  $(function(){
+    //为输入框绑定事件
+    $("#e_mail").blur(function(){
+      //1、失去焦点获得输入框的内容
+      var e_mailInput = $(this).val();
+      //2、去服务端校验邮箱是否存在---ajax
+      $.post(
+              "${pageContext.request.contextPath}/indexlogin/checkEmail",
+              {"e_mail":e_mailInput},
+              function(data){
+                var isExist = data.isExist;
+                //3、根据返回的isExist动态的显示信息
+                var e_mailInfo = "";
+                if(!/(\S)+[@]{1}(\S)+[.]{1}(\w)+/.test(e_mailInput)){
+                  e_mailInfo = "请输入正确格式的邮箱";
+                  $("#e_mailInfo").css("color","red");
+                }
+                else{
+                  if(isExist){
+                    //该邮箱被注册过
+                    e_mailInfo = "该邮箱已经被注册过";
+                    $("#e_mailInfo").css("color","red");
+                  }else{
+                    e_mailInfo = "该邮箱可以使用"
+                    $("#e_mailInfo").css("color","green");
+                  }
+                }
+                $("#e_mailInfo").html(e_mailInfo);
+              },
+              "json"
+      );
+    });
+  });
+
+  $(function(){
+    $("#password").blur(function(){
+      var password=$('#password').val();
+      var u_passwordInfo = "";
+      if(!password){
+        u_passwordInfo = "密码不能为空";
+        $("#u_passwordInfo").css("color","red");
+      }
+      if(password.length<6||password.length>15)
+      {
+        u_passwordInfo = "密码必须在6到15位之间";
+        $("#u_passwordInfo").css("color","red");
+      }
+      $("#u_passwordInfo").html(u_passwordInfo);
+    })
+  })
+
+  $(function(){
+    $("#repassword").blur(function(){
+      var password=$('#password').val();
+      var password_again=$('#repassword').val();
+      var passwordInfo = "";
+      if(password_again){
+        if(password_again==password){
+          passwordInfo = "两次密码一致"
+          $("#passwordInfo").css("color","green");
+        }else if(password_again!=password){
+          passwordInfo = "两次密码不一致";
+          $("#passwordInfo").css("color","red");
+        }
+      }
+      $("#passwordInfo").html(passwordInfo);
+
+    })
+
+  })
+</script>
+
+<script>
+  $('.ui.form').form({
+    fields : {
+      username : {
+        identifier: 'nickname',
+        rules: [{
+          type : 'empty',
+          prompt: '请输入用户名'
+        }]
+      },
+      password : {
+        identifier: 'password',
+        rules: [{
+          type : 'empty',
+          prompt: '请输入密码'
+        }]
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

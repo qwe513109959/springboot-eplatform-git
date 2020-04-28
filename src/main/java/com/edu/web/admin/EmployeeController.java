@@ -14,6 +14,7 @@ import java.util.Collection;
 
 
 @Controller
+@RequestMapping("/admin")
 public class EmployeeController {
     @Autowired
     EmployeeDao employeeDao;

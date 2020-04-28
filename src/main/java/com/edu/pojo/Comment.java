@@ -28,7 +28,6 @@ public class Comment {
     @ManyToOne
     private EnglishPlatform eplatform;
 
-
     // 自关联 comment有父类parentComment
     @OneToMany(mappedBy = "parentComment")
     private List<Comment> replyComments = new ArrayList<>();
