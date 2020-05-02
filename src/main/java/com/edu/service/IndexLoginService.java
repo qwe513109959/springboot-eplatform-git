@@ -34,23 +34,4 @@ public interface IndexLoginService {
     Page<Student> listStudents(Pageable pageable);
 
 
-//    **********************  **********************
-    /*
-    EduTypes saveEduType(EduTypes type);
-
-    EduTypes getEduType(Long id);
-
-    EduTypes getEduTypeByName(String name);
-
-    Page<EduTypes> listEduType(Pageable pageable);
-
-    List<EduTypes> listEduType();
-
-    List<EduTypes> listEduTypeTop(Integer size);
-
-    EduTypes updateEduType(Long id, EduTypes type);
-
-    void deleteEduType(Long id);
-
-     */
 }

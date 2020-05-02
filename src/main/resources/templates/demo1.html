@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>固定菜单例子 - Semantic UI - BUG先生公开课</title>
+    <meta name="description" content="Semantic UI 是一款非常优秀的前端开发框架。它在用户体验的设计上与Bootstrap和Foundation相比，更胜一筹。中文文档和视频教程由“BUG先生公开课”友情出品。" />
+    <meta name="keywords" content="Semantic UI, BUG先生公开课, 中文文档, 视频教程, 前端框架, 模板主题, 网站设计,  Web框架, Web设计, Bootstrap, Foundation, html5, ui, library, framework, javascript" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 7em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+        <a href="fixed.php#" class="header item">
+            <img class="logo" src="https://zijieke.com/semantic-ui/examples/assets/images/logo.png">
+            项目名
+        </a>
+        <a href="fixed.php#" class="item">主页</a>
+        <div class="ui simple dropdown item">
+            Dropdown <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="fixed.php#" th:href="@{/admin/eplatform}">链接选项</a>
+                <a class="item" href="fixed.php#">链接选项</a>
+                <div class="divider"></div>
+                <div class="header">标题项</div>
+                <div class="item">
+                    <i class="dropdown icon"></i>
+                    子菜单
+                    <div class="menu">
+                        <a class="item" href="fixed.php#">链接选项</a>
+                        <a class="item" href="fixed.php#">链接选项</a>
+                    </div>
+                </div>
+                <a class="item" href="fixed.php#">链接选项</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui main text container">
+    <h1 class="ui header">Semantic UI Fixed Template</h1>
+    <p>This is a basic fixed menu template using fixed size containers.</p>
+    <p>A text container is used for the main container, which is useful for single column layouts</p>
+    <img class="wireframe" src="assets/images/wireframe/media-paragraph.png">
+    <img class="wireframe" src="assets/images/wireframe/paragraph.png">
+    <img class="wireframe" src="assets/images/wireframe/paragraph.png">
+    <img class="wireframe" src="assets/images/wireframe/paragraph.png">
+    <img class="wireframe" src="assets/images/wireframe/paragraph.png">
+    <img class="wireframe" src="assets/images/wireframe/paragraph.png">
+    <img class="wireframe" src="assets/images/wireframe/paragraph.png">
+</div>
+
+<div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui stackable inverted divided grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header">Group 1</h4>
+                <div class="ui inverted link list">
+                    <a href="fixed.php#" class="item">Link One</a>
+                    <a href="fixed.php#" class="item">Link Two</a>
+                    <a href="fixed.php#" class="item">Link Three</a>
+                    <a href="fixed.php#" class="item">Link Four</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Group 2</h4>
+                <div class="ui inverted link list">
+                    <a href="fixed.php#" class="item">Link One</a>
+                    <a href="fixed.php#" class="item">Link Two</a>
+                    <a href="fixed.php#" class="item">Link Three</a>
+                    <a href="fixed.php#" class="item">Link Four</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Group 3</h4>
+                <div class="ui inverted link list">
+                    <a href="fixed.php#" class="item">Link One</a>
+                    <a href="fixed.php#" class="item">Link Two</a>
+                    <a href="fixed.php#" class="item">Link Three</a>
+                    <a href="fixed.php#" class="item">Link Four</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Footer Header</h4>
+                <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <img src="https://zijieke.com/semantic-ui/examples/assets/images/logo.png" class="ui centered mini image">
+        <div class="ui horizontal inverted small divided link list">
+            <a class="item" href="fixed.php#">Site Map</a>
+            <a class="item" href="fixed.php#">Contact Us</a>
+            <a class="item" href="fixed.php#">Terms and Conditions</a>
+            <a class="item" href="fixed.php#">Privacy Policy</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    #cnzz_stat_icon_1275993213{
+        display:none;
+    }</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275993213'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/z_stat.php%3Fid%3D1275993213%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+</body>
+
+</html>

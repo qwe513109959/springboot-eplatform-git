@@ -84,7 +84,7 @@ public class IndexLoginServiceImpl implements IndexLoginService {
 
     @Override
     public void deleteStudent(Integer id) {
-
+        indexlogindao.deleteById(id);
     }
 
     @Override

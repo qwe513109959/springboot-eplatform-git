@@ -13,6 +13,47 @@
 <!--导航-->
 <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
   <div class="ui container">
+
+    <div class="ui fixed inverted menu">
+      <div class="ui container">
+        <a href="#" class="header item">
+          <img class="logo" src="https://zijieke.com/semantic-ui/examples/assets/images/logo.png">
+          Eplatform后台管理
+        </a>
+        <a href="#" class="item">主页</a>
+
+        <a href="#" class="item">内容</a>
+
+        <div class="ui simple dropdown item">
+          Dropdown <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item" href="#" th:href="@{/admin/edutypes}" th:classappend="${n==1} ? 'active'">分类</a>
+            <a class="item" href="#" th:href="@{/admin/grade}">级别</a>
+            <a class="item" href="#" th:href="@{/admin/comment}">评论</a>
+          </div>
+        </div>
+        <div class="right m-item m-mobile-hide menu">
+          <div class="ui dropdown  item">
+            <div class="text">
+              <img class="ui avatar image" src="https://unsplash.it/100/100?image=1005" th:src="@{${session.user.avatar}}">
+              <span th:text="${session.user.nickname}">贾晓虎</span>
+            </div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+  <div class="ui container">
     <div class="ui inverted secondary stackable menu">
       <h2 class="ui teal header item">管理后台</h2>
       <a href="#" th:href="@{/admin/eplatform}" class=" m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i>内容</a>
