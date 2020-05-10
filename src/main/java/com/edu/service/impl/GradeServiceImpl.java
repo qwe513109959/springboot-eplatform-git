@@ -56,6 +56,12 @@ public class GradeServiceImpl implements GradeService {
         return repository.findAllById(convertToList(ids));
     }
 
+    /**
+    * @Description: Top列表展示
+    * @Param:
+    * @Author: Mr.Jia
+    * @Date: 2020/5/3 11:14 上午
+    */
     @Override
     public List<Grade> listGradeTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "englishPlatforms.size");

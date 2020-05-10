@@ -27,8 +27,6 @@ public class EnglishPlatform {
     private String content;
     private String firstPicture;
     private Integer views;
-    private boolean appreciation;
-    private boolean shareStatement;
     private boolean commentabled;
     private boolean published;
     private boolean recommend;
@@ -71,8 +69,6 @@ public class EnglishPlatform {
                 ", content='" + content + '\'' +
                 ", firstPicture='" + firstPicture + '\'' +
                 ", views=" + views +
-                ", appreciation=" + appreciation +
-                ", shareStatement=" + shareStatement +
                 ", commentabled=" + commentabled +
                 ", published=" + published +
                 ", recommend=" + recommend +
@@ -88,17 +84,17 @@ public class EnglishPlatform {
     }
 
     //1,2,3
-    private String gradesToIds(List<Grade> tags) {
-        if (!tags.isEmpty()) {
+    private String gradesToIds(List<Grade> grades) {
+        if (!grades.isEmpty()) {
             StringBuffer ids = new StringBuffer();
             boolean flag = false;
-            for (Grade tag : tags) {
+            for (Grade grade : grades) {
                 if (flag) {
                     ids.append(",");
                 } else {
                     flag = true;
                 }
-                ids.append(tag.getId());
+                ids.append(grade.getId());
             }
             return ids.toString();
         } else {
@@ -145,22 +141,6 @@ public class EnglishPlatform {
 
     public void setViews(Integer views) {
         this.views = views;
-    }
-
-    public boolean isAppreciation() {
-        return appreciation;
-    }
-
-    public void setAppreciation(boolean appreciation) {
-        this.appreciation = appreciation;
-    }
-
-    public boolean isShareStatement() {
-        return shareStatement;
-    }
-
-    public void setShareStatement(boolean shareStatement) {
-        this.shareStatement = shareStatement;
     }
 
     public boolean isCommentabled() {

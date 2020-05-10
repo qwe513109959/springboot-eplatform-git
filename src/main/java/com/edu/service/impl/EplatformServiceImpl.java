@@ -155,7 +155,7 @@ public class EplatformServiceImpl implements EplatformService {
     }
     
     /** 
-    * @Description: Jpa；按更新时间排序
+    * @Description: Jpa；按更新时间排序；查询推荐内容
     * @Param:  
     * @Author: Mr.Jia 
     * @Date: 2020/4/4 6:16 下午 
@@ -167,6 +167,12 @@ public class EplatformServiceImpl implements EplatformService {
         return repository.findTop(pageable);
     }
 
+    /** 
+    * @Description: 浏览量设置 
+    * @Param: 
+    * @Author: Mr.Jia 
+    * @Date: 2020/5/4 11:47 上午 
+    */ 
     @Transactional
     @Override
     public EnglishPlatform saveEplatform(EnglishPlatform e) {
@@ -181,6 +187,12 @@ public class EplatformServiceImpl implements EplatformService {
         return repository.save(e);
     }
 
+    /** 
+    * @Description: 更新内容
+    * @Param: 
+    * @Author: Mr.Jia 
+    * @Date: 2020/5/4 11:47 上午 
+    */ 
     @Transactional
     @Override
     public EnglishPlatform updateEplatform(Long id, EnglishPlatform englishPlatform) {

@@ -44,13 +44,14 @@ public class EplatformController {
     * @Date: 2020/4/1 2:12 下午 
     */ 
     @GetMapping("/eplatform")
-    public String toeplatform(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String toeplatform(@PageableDefault(size = 2, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
                               EplatformQuery eplatform,
                               Model model) {
         model.addAttribute("types", eduTypesService.listEduType());
         model.addAttribute("eplatform", eduTypesService.listEduType());
         model.addAttribute("page", eplatformService.listEplatform(pageable, eplatform));
         return LIST;
+
     }
 
     /** 
@@ -103,7 +104,6 @@ public class EplatformController {
         } else {
             e = eplatformService.updateEplatform(eplatform.getId(), eplatform);
         }
-
         if (e == null) {
             attributes.addFlashAttribute("message", "操作失败");
         } else {

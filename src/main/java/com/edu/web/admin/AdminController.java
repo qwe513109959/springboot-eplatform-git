@@ -61,7 +61,8 @@ public class AdminController {
         if (user != null) {
             user.setPassword(null);
             session.setAttribute("user", user);
-            return "admin/index";
+             return "admin/index";
+            // 跳转到 /home
         } else {
             attributes.addFlashAttribute("msg", "用户名和密码不正确");
             return "redirect:/admin";

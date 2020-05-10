@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
+    <meta
+            name="description"
+            content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+    />
+    <meta name="keywords" content="Semantic-UI, Theme, Design, Template" />
+    <meta name="author" content="PPType" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title th:replace="${title}">Eplatform</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            type="text/css"
+    />
+    <link rel="stylesheet" href="../static/css/mycss.css" th:href="@{/css/mycss.css}">
+</head>
+
+<body id="root">
+<!-- 头部 topbar-->
+<nav th:fragment="menu(n)" class="ui tablet computer only padded grid">
+    <div class="ui inverted borderless top fixed fluid menu">
+        <a class="header item">Project name</a>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui small input"><input placeholder="Search..." /></div>
+            </div>
+            <a class="item">Dashboard</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown  item">
+                    <div class="text">
+                        <img class="ui avatar image" src="https://unsplash.it/100/100?image=1005" th:src="@{${session.user.avatar}}">
+                        <span th:text="${session.user.nickname}">贾晓虎</span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- sidebar 左侧边栏 -->
+<nav
+        class="three wide tablet only three wide computer only column"
+        id="sidebar"
+        th:fragment="sidebarleft"
+>
+    <div class="ui vertical borderless fluid text menu">
+        <a href="#" th:href="@{/admin/eplatform}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class=" home icon"></i>内容</a>
+        <a href="#" th:href="@{/admin/edutypes}" class=" m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class=" idea icon"></i>类别</a>
+        <a href="#" th:href="@{/admin/grade}"  class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class=" tags icon"></i>级别</a>
+<!--            <a href="#" th:href="@{/admin/comment}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class=" tags icon"></i>主页</a>-->
+
+        <div class="ui hidden divider"></div>
+        <a class="item">Nav item</a>
+        <a class="item">Nav item again</a>
+        <a class="item">One more nav</a>
+        <a class="item">Another nav item</a>
+        <a class="item">More navigation</a>
+
+        <div class="ui hidden divider"></div>
+        <a class="item">Macintosh</a>
+        <a class="item">Linux</a>
+        <a class="item">Windows</a>
+    </div>
+</nav>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".ui.toggle.button").click(function() {
+            $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+        });
+    });
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+</script>
+
+</body>
+</html>
